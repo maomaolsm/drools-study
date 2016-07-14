@@ -1,0 +1,33 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+    maven {
+        name 'jboss'
+        url 'http://repository.jboss.org/nexus/content/groups/public-jboss'
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile('org.projectlombok:lombok:1.16.6')
+    compile('org.slf4j:slf4j-simple:1.7.13')
+    compile('org.drools:drools-core:6.4.0.Final')
+    compile('org.drools:drools-compiler:6.4.0.Final')
+    testCompile("junit:junit:4.12")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.12'
+}
+
+tasks.withType(JavaCompile) {
+    // 编译格式指定为UTF-8
+    options.encoding = 'UTF-8'
+    // 查看编译中哪些过时的详情
+    // options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+}
